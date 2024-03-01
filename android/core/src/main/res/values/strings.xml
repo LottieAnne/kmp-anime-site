@@ -8,4 +8,7 @@
     <string name="sample_error_authentication_description">通信中に問題が発生いたしました。お手数ですが、もう一度お試しください。</string>
     <string name="sample_error_login_description">ログインできませんでした。アプリを再起動して再度ログインをお試しください。</string>
     <string name="sample_error_maintenance_description">サーバーメンテナンス作業に伴い、現在サービスを一時停止させていただいております。</string>
+    <string name="tutorial_title">ようこそ</string>
+    <string name="tutorial_body">ようこそ文言</string>
+    <string name="tutorial_start">はじめる</string>
 </resources>
