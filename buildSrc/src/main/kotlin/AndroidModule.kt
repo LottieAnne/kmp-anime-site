@@ -8,5 +8,8 @@ sealed interface AndroidModule : Module {
 
     enum class Feature(override val path: String) : AndroidModule {
         Sample(":android:features:sample"),
+        Tutorial(":android:features:tutorial"),
+        AnimeList(":android:features:animeList"),
+        AnimeListDetail(":android:features:animeListDetail")
     }
 }

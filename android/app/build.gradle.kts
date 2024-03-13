@@ -29,6 +29,9 @@ dependencies {
         AndroidModule.Base.Core,
         AndroidModule.Base.Navigation,
         AndroidModule.Feature.Sample,
+        AndroidModule.Feature.Tutorial,
+        AndroidModule.Feature.AnimeList,
+        AndroidModule.Feature.AnimeListDetail,
     )
     implementations(
         libs.androidx.core,
