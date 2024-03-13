@@ -19,13 +19,13 @@ import jp.co.yumemi.core.components.CommonTopAppBar
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.utils.render
 import jp.co.yumemi.core.utils.screenPadding
-import jp.co.yumemi.domain.entities.ListCardEntity
-import jp.co.yumemi.list.ListState
+import jp.co.yumemi.domain.entities.AnimeListItemEntity
+import jp.co.yumemi.animeList.AnimeListState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnimeListScreen(
-    state: ListState,
+    state: AnimeListState,
     onClickListCard: () -> Unit,
 ) {
     Scaffold(
@@ -41,23 +41,23 @@ fun AnimeListScreen(
                 .background(color = SampleTheme.colors.background)
                 .padding(paddingValues = contentPadding),
         ) {
-            state.render<ListState.Loading> {
+            state.render<AnimeListState.Loading> {
                 // TODO: LoadingIndicatorを実装する
             }
 
-            state.render<ListState.Error> {
+            state.render<AnimeListState.Error> {
                 // TODO: Errorを実装
             }
 
-            state.render<ListState.Stable> {
+            state.render<AnimeListState.Stable> {
                 // TODO: API繋ぎ込み
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
-                    list.forEach { item ->
-                        AnimeListCard(
+                    animeList.forEach { item ->
+                        AnimeListItem(
                             title = item.title,
                             seasonName = item.seasonName,
                             onClick = onClickListCard,
@@ -74,94 +74,94 @@ fun AnimeListScreen(
 private fun AnimeListScreenPreview() {
     SampleTheme {
         AnimeListScreen(
-            state = ListState.Stable.Initial(
-                list = listOf(
-                    ListCardEntity(
+            state = AnimeListState.Stable.Initial(
+                animeList = listOf(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"
                     ),
-                    ListCardEntity(
+                    AnimeListItemEntity(
                         image = null,
                         title = "Title Japanese",
                         seasonName = "Season Name"

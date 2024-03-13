@@ -7,7 +7,7 @@ import jp.co.yumemi.utils.Parcelize
  * アニメ一覧画面のアイテム
  */
 @Parcelize
-data class ListCardEntity(
+data class AnimeListItemEntity(
     /** 作品のイメージ画像 */
     val image: Int?,
     /** 作品のタイトル */
