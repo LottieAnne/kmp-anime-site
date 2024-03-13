@@ -2,6 +2,7 @@ package jp.co.yumemi.features.list
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -25,23 +26,33 @@ import jp.co.yumemi.core.R
 
 @Composable
 internal fun ListCard(
-    @DrawableRes
-    image: Int,
     title: String,
     seasonName: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    @DrawableRes
+    image: Int? = null,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(Spacing.XXXL),
+            .height(Spacing.XXXL)
+            .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(id = image),
-            contentDescription = null,
-            modifier = Modifier.size(Spacing.XXXL)
-        )
+        if (image == null) {
+            Image(
+                painter = painterResource(id = R.drawable.img_no_image),
+                contentDescription = null,
+                modifier = Modifier.size(Spacing.XXXL)
+            )
+        } else {
+            Image(
+                painter = painterResource(id = image),
+                contentDescription = null,
+                modifier = Modifier.size(Spacing.XXXL)
+            )
+        }
         Spacer(modifier = Modifier.width(Spacing.XS))
         Column(
             modifier = Modifier.padding(vertical = Spacing.XXS)
@@ -65,7 +76,9 @@ private fun ListCardPreview() {
     Surface {
         ListCard(
             image = R.drawable.img_no_image,
-            title = "Title Japanese", seasonName = "Season Name"
+            title = "Title Japanese",
+            seasonName = "Season Name",
+            onClick = {},
         )
     }
 }
