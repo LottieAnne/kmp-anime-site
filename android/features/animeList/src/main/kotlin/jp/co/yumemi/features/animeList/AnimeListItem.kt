@@ -1,6 +1,5 @@
 package jp.co.yumemi.features.animeList
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -16,11 +15,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import jp.co.yumemi.core.primitives.Spacing
 import jp.co.yumemi.core.R
 
@@ -28,10 +29,9 @@ import jp.co.yumemi.core.R
 internal fun AnimeListItem(
     title: String,
     seasonName: String,
+    imageUrl: String?,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    @DrawableRes
-    image: Int? = null,
 ) {
     Row(
         modifier = modifier
@@ -40,16 +40,17 @@ internal fun AnimeListItem(
             .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        if (image == null) {
+        if (imageUrl == null) {
             Image(
                 painter = painterResource(id = R.drawable.img_no_image),
                 contentDescription = null,
                 modifier = Modifier.size(Spacing.XXXL)
             )
         } else {
-            Image(
-                painter = painterResource(id = image),
+            AsyncImage(
+                model = imageUrl,
                 contentDescription = null,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier.size(Spacing.XXXL)
             )
         }
@@ -75,7 +76,7 @@ internal fun AnimeListItem(
 private fun AnimeListItemPreview() {
     Surface {
         AnimeListItem(
-            image = R.drawable.img_no_image,
+            imageUrl = "http://shirobako-anime.com/images/ogp.jpg",
             title = "Title Japanese",
             seasonName = "Season Name",
             onClick = {},

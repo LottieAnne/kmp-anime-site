@@ -8,10 +8,10 @@ import jp.co.yumemi.utils.Parcelize
  */
 @Parcelize
 data class AnimeListItemEntity(
-    /** 作品のイメージ画像 */
-    val image: Int?,
     /** 作品のタイトル */
     val title: String,
     /** 作品のリリース時期 */
     val seasonName: String,
+    /** 作品のイメージ画像 */
+    val imageUrl: String?,
 ) : Parcelable

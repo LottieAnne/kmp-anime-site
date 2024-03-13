@@ -60,6 +60,7 @@ fun AnimeListScreen(
                         AnimeListItem(
                             title = item.title,
                             seasonName = item.seasonName,
+                            imageUrl = item.imageUrl,
                             onClick = onClickListCard,
                         )
                     }
@@ -77,94 +78,39 @@ private fun AnimeListScreenPreview() {
             state = AnimeListState.Stable.Initial(
                 animeList = listOf(
                     AnimeListItemEntity(
-                        image = null,
                         title = "Title Japanese",
-                        seasonName = "Season Name"
+                        seasonName = "Season Name",
+                        imageUrl = null,
                     ),
                     AnimeListItemEntity(
-                        image = null,
                         title = "Title Japanese",
-                        seasonName = "Season Name"
+                        seasonName = "Season Name",
+                        imageUrl = null,
                     ),
                     AnimeListItemEntity(
-                        image = null,
                         title = "Title Japanese",
-                        seasonName = "Season Name"
+                        seasonName = "Season Name",
+                        imageUrl = null,
                     ),
                     AnimeListItemEntity(
-                        image = null,
                         title = "Title Japanese",
-                        seasonName = "Season Name"
+                        seasonName = "Season Name",
+                        imageUrl = null,
                     ),
                     AnimeListItemEntity(
-                        image = null,
                         title = "Title Japanese",
-                        seasonName = "Season Name"
+                        seasonName = "Season Name",
+                        imageUrl = null,
                     ),
                     AnimeListItemEntity(
-                        image = null,
                         title = "Title Japanese",
-                        seasonName = "Season Name"
+                        seasonName = "Season Name",
+                        imageUrl = null,
                     ),
                     AnimeListItemEntity(
-                        image = null,
                         title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
-                    ),
-                    AnimeListItemEntity(
-                        image = null,
-                        title = "Title Japanese",
-                        seasonName = "Season Name"
+                        seasonName = "Season Name",
+                        imageUrl = null,
                     ),
                 )
             ),
