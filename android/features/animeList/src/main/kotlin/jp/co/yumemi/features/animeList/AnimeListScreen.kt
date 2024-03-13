@@ -1,4 +1,4 @@
-package jp.co.yumemi.features.list
+package jp.co.yumemi.features.animeList
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,7 +24,7 @@ import jp.co.yumemi.list.ListState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListScreen(
+fun AnimeListScreen(
     state: ListState,
     onClickListCard: () -> Unit,
 ) {
@@ -57,7 +57,7 @@ fun ListScreen(
                         .verticalScroll(rememberScrollState())
                 ) {
                     list.forEach { item ->
-                        ListCard(
+                        AnimeListCard(
                             title = item.title,
                             seasonName = item.seasonName,
                             onClick = onClickListCard,
@@ -71,9 +71,9 @@ fun ListScreen(
 
 @Preview
 @Composable
-private fun ListScreenPreview() {
+private fun AnimeListScreenPreview() {
     SampleTheme {
-        ListScreen(
+        AnimeListScreen(
             state = ListState.Stable.Initial(
                 list = listOf(
                     ListCardEntity(

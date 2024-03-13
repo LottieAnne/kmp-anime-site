@@ -1,7 +1,7 @@
 import java.io.FileInputStream
 import java.util.Properties
 
-include(":android:features:list")
+include(":android:features:animeList")
 
 
 rootProject.name = "yumemi-kmp-template"
@@ -40,7 +40,7 @@ include(":android:core")
 include(":android:navigation")
 include(":android:features:sample")
 include(":android:features:tutorial")
-include(":android:features:list")
+include(":android:features:animeList")
 // KMP
 include(":kmp:application")
 include(":kmp:domain")

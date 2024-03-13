@@ -1,4 +1,4 @@
-package jp.co.yumemi.features.list
+package jp.co.yumemi.features.animeList
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -25,7 +25,7 @@ import jp.co.yumemi.core.primitives.Spacing
 import jp.co.yumemi.core.R
 
 @Composable
-internal fun ListCard(
+internal fun AnimeListCard(
     title: String,
     seasonName: String,
     onClick: () -> Unit,
@@ -72,9 +72,9 @@ internal fun ListCard(
 
 @Preview
 @Composable
-private fun ListCardPreview() {
+private fun AnimeListCardPreview() {
     Surface {
-        ListCard(
+        AnimeListCard(
             image = R.drawable.img_no_image,
             title = "Title Japanese",
             seasonName = "Season Name",
