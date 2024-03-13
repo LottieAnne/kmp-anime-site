@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "jp.co.yumemi.features.common"
+    namespace = "jp.co.yumemi.features.animeList"
 }
 
 dependencies {
