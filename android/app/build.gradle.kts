@@ -29,6 +29,7 @@ dependencies {
         AndroidModule.Base.Core,
         AndroidModule.Base.Navigation,
         AndroidModule.Feature.Sample,
+        AndroidModule.Feature.Splash,
     )
     implementations(
         libs.androidx.core,
