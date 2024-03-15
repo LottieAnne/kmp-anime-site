@@ -11,5 +11,6 @@ sealed interface AndroidModule : Module {
         Tutorial(":android:features:tutorial"),
         Home(":android:features:home"),
         WorkDetail(":android:features:workDetail"),
+        Splash(":android:features:splash"),
     }
 }

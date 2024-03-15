@@ -32,6 +32,7 @@ dependencies {
         AndroidModule.Feature.Tutorial,
         AndroidModule.Feature.Home,
         AndroidModule.Feature.WorkDetail,
+        AndroidModule.Feature.Splash,
     )
     implementations(
         libs.androidx.core,
