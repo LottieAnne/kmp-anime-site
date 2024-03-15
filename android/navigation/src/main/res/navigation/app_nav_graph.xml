@@ -7,7 +7,8 @@
     >
 
     <navigation android:id="@+id/navigation"
-        app:startDestination="@id/sample_nav_graph">
+        app:startDestination="@id/home_nav_graph">
         <include app:graph="@navigation/sample_nav_graph" />
+        <include app:graph="@navigation/home_nav_graph" />
     </navigation>
 </navigation>

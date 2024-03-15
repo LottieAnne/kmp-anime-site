@@ -20,9 +20,28 @@ import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.utils.screenPadding
 import jp.co.yumemi.domain.entities.HomeEntity
 
+@Composable
+fun HomeScreenRoot() {
+    HomeScreen(
+        homeList = listOf(
+            HomeEntity(
+                title = "Title Japanese",
+                seasonName = "Season Name",
+                imageUrl = null,
+            ),
+            HomeEntity(
+                title = "Title Japanese",
+                seasonName = "Season Name",
+                imageUrl = null,
+            ),
+        ),
+        onClickListCard = {}, // TODO: あとで実装
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+private fun HomeScreen(
     homeList: List<HomeEntity>,
     onClickListCard: () -> Unit,
 ) {
