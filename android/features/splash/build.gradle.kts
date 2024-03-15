@@ -14,7 +14,7 @@ dependencies {
     mppBase()
     modules(
         AndroidModule.Base.Core,
-        KmpModule.Feature.Sample,
+        KmpModule.Feature.Splash,
     )
     implementations(
         libs.kotlinx.coroutinesCore,

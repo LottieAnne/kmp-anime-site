@@ -1,12 +1,15 @@
 package jp.co.yumemi.features.splash
 
+import android.window.SplashScreen
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -17,10 +20,22 @@ import jp.co.yumemi.core.utils.render
 import jp.co.yumemi.core.utils.screenPadding
 import jp.co.yumemi.splash.SplashState
 import jp.co.yumemi.core.R
+import jp.co.yumemi.splash.SplashEvent
+import jp.co.yumemi.splash.SplashIntent
 
 @Composable
-fun SplashScreen(
-    state: SplashState,
+fun SplashScreenRoot(
+    navigator: SplashNavigator,
+) {
+    navigator.home()// TODO 後で削除
+    SplashScreen(navigator)
+}
+
+
+@Composable
+private fun SplashScreen(
+    // TODO: state 後で追加
+    navigator: SplashNavigator?,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -37,10 +52,6 @@ fun SplashScreen(
                 contentDescription = null,
                 modifier = Modifier.size(100.dp)
             )
-
-            state.render<SplashState.Error> {
-                // TOOD: Error画面実装
-            }
         }
     }
 }
@@ -49,8 +60,6 @@ fun SplashScreen(
 @Composable
 private fun SplashScreenPreview() {
     SampleTheme {
-        SplashScreen(
-            state = SplashState.Initial,
-        )
+        SplashScreen(navigator = null)
     }
 }
