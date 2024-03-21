@@ -17,24 +17,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
 import jp.co.yumemi.core.primitives.SampleTheme
+import jp.co.yumemi.core.utils.render
 import jp.co.yumemi.core.utils.screenPadding
 import jp.co.yumemi.domain.entities.HomeEntity
+import jp.co.yumemi.home.HomeState
 
 @Composable
-fun HomeScreenRoot() {
+fun HomeScreenRoot(
+) {
+    // TODO: contract あとで実装
+
     HomeScreen(
-        homeList = listOf(
-            HomeEntity(
-                title = "Title Japanese",
-                seasonName = "Season Name",
-                imageUrl = null,
-            ),
-            HomeEntity(
-                title = "Title Japanese",
-                seasonName = "Season Name",
-                imageUrl = null,
-            ),
-        ),
+        state = HomeState.Stable(
+            homeList = listOf(
+                HomeEntity(
+                    id = 1,
+                    title = "Title Japanese",
+                    seasonName = "Season Name",
+                    imageUrl = null,
+                ),
+                HomeEntity(
+                    id = 1,
+                    title = "Title Japanese",
+                    seasonName = "Season Name",
+                    imageUrl = null,
+                )
+            )
+        ), // TODO: あとで削除
         onClickListCard = {}, // TODO: あとで実装
     )
 }
@@ -42,7 +51,8 @@ fun HomeScreenRoot() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreen(
-    homeList: List<HomeEntity>,
+    state: HomeState,
+//    homeList: List<HomeEntity>,
     onClickListCard: () -> Unit,
 ) {
     Scaffold(
@@ -58,18 +68,29 @@ private fun HomeScreen(
                 .background(color = SampleTheme.colors.background)
                 .padding(paddingValues = contentPadding),
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-            ) {
-                homeList.forEach { item ->
-                    HomeListItem(
-                        title = item.title,
-                        seasonName = item.seasonName,
-                        imageUrl = item.imageUrl,
-                        onClick = onClickListCard,
-                    )
+            state.render<HomeState.Loading> {
+                // TODO: Loading画面の追加
+            }
+
+            state.render<HomeState.Error> {
+                // TODO: Error文言の追加
+            }
+
+            state.render<HomeState.Stable> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    homeList.forEach { item ->
+                        HomeListItem(
+                            id = item.id,
+                            title = item.title,
+                            seasonName = item.seasonName,
+                            imageUrl = item.imageUrl,
+                            onClick = onClickListCard,
+                        )
+                    }
                 }
             }
         }
@@ -81,42 +102,51 @@ private fun HomeScreen(
 private fun HomeScreenPreview() {
     SampleTheme {
         HomeScreen(
-            homeList = listOf(
-                HomeEntity(
-                    title = "Title Japanese",
-                    seasonName = "Season Name",
-                    imageUrl = null,
-                ),
-                HomeEntity(
-                    title = "Title Japanese",
-                    seasonName = "Season Name",
-                    imageUrl = null,
-                ),
-                HomeEntity(
-                    title = "Title Japanese",
-                    seasonName = "Season Name",
-                    imageUrl = null,
-                ),
-                HomeEntity(
-                    title = "Title Japanese",
-                    seasonName = "Season Name",
-                    imageUrl = null,
-                ),
-                HomeEntity(
-                    title = "Title Japanese",
-                    seasonName = "Season Name",
-                    imageUrl = null,
-                ),
-                HomeEntity(
-                    title = "Title Japanese",
-                    seasonName = "Season Name",
-                    imageUrl = null,
-                ),
-                HomeEntity(
-                    title = "Title Japanese",
-                    seasonName = "Season Name",
-                    imageUrl = null,
-                ),
+            state = HomeState.Stable(
+                homeList = listOf(
+                    HomeEntity(
+                        id = 1,
+                        title = "Title Japanese",
+                        seasonName = "Season Name",
+                        imageUrl = null,
+                    ),
+                    HomeEntity(
+                        id = 1,
+                        title = "Title Japanese",
+                        seasonName = "Season Name",
+                        imageUrl = null,
+                    ),
+                    HomeEntity(
+                        id = 1,
+                        title = "Title Japanese",
+                        seasonName = "Season Name",
+                        imageUrl = null,
+                    ),
+                    HomeEntity(
+                        id = 1,
+                        title = "Title Japanese",
+                        seasonName = "Season Name",
+                        imageUrl = null,
+                    ),
+                    HomeEntity(
+                        id = 1,
+                        title = "Title Japanese",
+                        seasonName = "Season Name",
+                        imageUrl = null,
+                    ),
+                    HomeEntity(
+                        id = 1,
+                        title = "Title Japanese",
+                        seasonName = "Season Name",
+                        imageUrl = null,
+                    ),
+                    HomeEntity(
+                        id = 1,
+                        title = "Title Japanese",
+                        seasonName = "Season Name",
+                        imageUrl = null,
+                    ),
+                )
             ),
             onClickListCard = {},
         )

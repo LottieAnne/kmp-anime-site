@@ -19,12 +19,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
+import jp.co.yumemi.core.R
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.primitives.Spacing
-import jp.co.yumemi.core.R
 
 @Composable
 internal fun HomeListItem(
+    id: Int,
     title: String,
     seasonName: String,
     imageUrl: String?,
@@ -75,6 +76,7 @@ private fun HomeListItemPreview() {
     SampleTheme {
         Surface {
             HomeListItem(
+                id = 1,
                 imageUrl = "http://shirobako-anime.com/images/ogp.jpg",
                 title = "Title Japanese",
                 seasonName = "Season Name",
