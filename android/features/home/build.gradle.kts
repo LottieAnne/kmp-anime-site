@@ -11,10 +11,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":kmp:presentation:home-shared"))
     mppBase()
     modules(
         AndroidModule.Base.Core,
-        KmpModule.Feature.Sample,
+        KmpModule.Feature.Home,
     )
     implementations(
         libs.kotlinx.coroutinesCore,
