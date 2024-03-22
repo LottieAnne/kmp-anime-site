@@ -37,6 +37,7 @@ include(":android:core")
 include(":android:navigation")
 include(":android:features:sample")
 include(":android:features:tutorial")
+include(":android:features:home")
 // KMP
 include(":kmp:application")
 include(":kmp:domain")
