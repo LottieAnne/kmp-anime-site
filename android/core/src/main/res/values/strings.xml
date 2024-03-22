@@ -12,4 +12,6 @@
     <string name="tutorial_body">ようこそ文言</string>
     <string name="tutorial_start">はじめる</string>
     <string name="home_title">アニメ一覧</string>
+    <string name="work_detail_title">詳細</string>
+    <string name="work_detail_episode">エピソード</string>
 </resources>
