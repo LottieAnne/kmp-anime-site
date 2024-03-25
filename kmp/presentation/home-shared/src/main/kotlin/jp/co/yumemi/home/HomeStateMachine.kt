@@ -1,13 +1,15 @@
 package jp.co.yumemi.home
 
 import jp.co.yumemi.domain.core.ErrorHandler
+import jp.co.yumemi.domain.core.execute
 import jp.co.yumemi.domain.core.runHandling
-import jp.co.yumemi.domain.usecases.HomeUseCase
+import jp.co.yumemi.domain.usecases.GetWorkListUseCase
 import tech.fika.macaron.statemachine.components.StateMachine
+import tech.fika.macaron.statemachine.components.event
 import tech.fika.macaron.statemachine.components.result
 
 class HomeStateMachine(
-    private val homeUseCase: HomeUseCase,
+    private val getWorkListUseCase: GetWorkListUseCase,
     private val errorHandler: ErrorHandler,
 ) : StateMachine<
         HomeIntent,
@@ -17,10 +19,11 @@ class HomeStateMachine(
         HomeEvent>(
     builder = {
         state<HomeState.Initial> {
+            interpret<HomeIntent.OnStart> { HomeAction.GetHomeWorkList }
             process<HomeAction.GetHomeWorkList> {
                 result(HomeResult.Loading)
                 runHandling(errorHandler) {
-                    homeUseCase.execute(arguments = HomeUseCase.Args(id = 1))
+                    getWorkListUseCase.execute()
                 }.onSuccess {
                     result(HomeResult.GetHomeWorkListSuccess(homeList = it))
                 }.onFailure {
@@ -37,7 +40,10 @@ class HomeStateMachine(
         }
 
         state<HomeState.Stable> {
-            //TODO: 後から実装
+            interpret<HomeIntent.ClickListItem> { HomeAction.NavigateDetails(intent.listItem) }
+            process<HomeAction.NavigateDetails> {
+                event(HomeEvent.NavigateDetails(it.action.listItem))
+            }
         }
     }
 )
