@@ -6,8 +6,8 @@ import io.ktor.client.request.accept
 import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import io.ktor.http.URLProtocol
 import jp.co.yumemi.application.Config
-import jp.co.yumemi.data.core.DataException.*
 import jp.co.yumemi.remote.core.clients.ApiClient
 import jp.co.yumemi.remote.core.clients.DefaultHttpClient
 import jp.co.yumemi.remote.core.ext.installJsonSerializer
@@ -22,6 +22,8 @@ class DefaultApiClientFactory(
             engine = HttpClientEngineFactory().create(),
         ) {
             install(DefaultRequest) {
+                url { protocol = URLProtocol.HTTPS }
+                host = "api.annict.com"
                 header(HttpHeaders.ContentType, ContentType.Application.Json.toString())
                 header(HttpHeaders.Connection, "close") // to avoid java.io.IOException
                 accept(ContentType.Application.Json)
@@ -32,5 +34,5 @@ class DefaultApiClientFactory(
                 installLogging()
             }
         },
-    )
+    ).apply { setApiKey(apiKey = "U6pgNgk0TQSE5FnrP3DGvo86bWDPtOqYjT_LqD_v3RQ", paramName = "access_token") }
 }
