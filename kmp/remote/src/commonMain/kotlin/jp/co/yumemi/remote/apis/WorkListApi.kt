@@ -22,10 +22,11 @@ class HomeApiImpl(
             headers = headers,
             body = null
         )
+        val authNames = listOf("access_token")
         return apiClient.jsonRequest(
-            authNames = listOf(),
+            authNames = authNames,
             requestConfig = requestConfig,
-            body = null
+            body = null,
         ).wrap()
     }
 }

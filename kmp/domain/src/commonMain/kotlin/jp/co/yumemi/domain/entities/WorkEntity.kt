@@ -7,8 +7,7 @@ import jp.co.yumemi.utils.Parcelize
  * ホーム画面 一覧のアイテム
  */
 @Parcelize
-data class HomeEntity(
-    val id: Int,
+data class WorkEntity(
     /** 作品のタイトル */
     val title: String,
     /** 作品のリリース時期 */
