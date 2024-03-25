@@ -22,7 +22,7 @@ class HomeStateMachine(
                 runHandling(errorHandler) {
                     homeUseCase.execute(arguments = HomeUseCase.Args(id = 1))
                 }.onSuccess {
-                    result(HomeResult.GetHomeWorkListSuccess(homeList = listOf(it)))
+                    result(HomeResult.GetHomeWorkListSuccess(homeList = it))
                 }.onFailure {
                     result(HomeResult.GetHomeWorkListError(error = it))
                 }
