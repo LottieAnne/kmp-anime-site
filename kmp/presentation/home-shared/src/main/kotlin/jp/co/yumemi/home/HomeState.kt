@@ -1,10 +1,9 @@
 package jp.co.yumemi.home
 
 import jp.co.yumemi.domain.core.DomainError
-import jp.co.yumemi.domain.entities.HomeEntity
+import jp.co.yumemi.domain.entities.WorkEntity
 import jp.co.yumemi.utils.Parcelable
 import jp.co.yumemi.utils.Parcelize
-import kotlinx.parcelize.RawValue
 import tech.fika.macaron.core.contract.State
 
 sealed class HomeState : State, Parcelable {
@@ -16,7 +15,7 @@ sealed class HomeState : State, Parcelable {
 
     @Parcelize
     data class Stable(
-        val homeList: List<HomeEntity>,
+        val homeList: List<WorkEntity>,
     ) : HomeState()
 
     @Parcelize
