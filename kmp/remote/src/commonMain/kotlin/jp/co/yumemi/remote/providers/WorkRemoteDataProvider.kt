@@ -1,17 +1,16 @@
 package jp.co.yumemi.remote.providers
 
 import jp.co.yumemi.data.core.runHandling
-import jp.co.yumemi.data.sources.HomeRemoteDataSource
-import jp.co.yumemi.remote.apis.HomeApi
+import jp.co.yumemi.data.sources.WorkRemoteDataSource
+import jp.co.yumemi.remote.apis.WorkListApi
 import jp.co.yumemi.remote.core.exception.RemoteExceptionHandler
-import jp.co.yumemi.remote.mappers.HomeRemoteMapper
+import jp.co.yumemi.remote.mappers.WorkListRemoteMapper
 
-class HomeRemoteDataProvider(
-    private val homeApi: HomeApi,
+class WorkRemoteDataProvider(
+    private val workListApi: WorkListApi,
     private val exceptionHandler: RemoteExceptionHandler,
-) : HomeRemoteDataSource {
-    override suspend fun getHomeWorkList(id: Int) = runHandling(exceptionHandler) {
-        homeApi.getHomeWorkList(id).body().workList.map(HomeRemoteMapper::toDataModel)
-        homeApi.getHomeWorkList(id).body().let(HomeRemoteMapper::toDataModel)
+) : WorkRemoteDataSource {
+    override suspend fun getWorkList() = runHandling(exceptionHandler) {
+        workListApi.getWorkList().body().let(WorkListRemoteMapper::toDataModel)
     }
 }

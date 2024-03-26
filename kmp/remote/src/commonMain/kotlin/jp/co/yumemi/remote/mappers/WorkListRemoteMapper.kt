@@ -1,16 +1,15 @@
 package jp.co.yumemi.remote.mappers
 
 import jp.co.yumemi.data.models.WorkListModel
-import jp.co.yumemi.remote.models.HomeApiModel
 import jp.co.yumemi.remote.models.WorkApiModel
+import jp.co.yumemi.remote.models.WorkResponseApiModel
 
-internal object HomeRemoteMapper {
+internal object WorkListRemoteMapper {
     fun toDataModel(apiModel: WorkApiModel) = WorkListModel(
-        id = apiModel.id,
         title = apiModel.title,
         seasonName = apiModel.seasonName,
         imageUrl = apiModel.image.imageUrl,
     )
 
-    fun toDataModel(apiModel: HomeApiModel): List<WorkListModel> = apiModel.workList.map(::toDataModel)
+    fun toDataModel(apiModel: WorkResponseApiModel): List<WorkListModel> = apiModel.workList.map(::toDataModel)
 }

@@ -5,16 +5,16 @@ import jp.co.yumemi.remote.core.infrastructure.HttpResponse
 import jp.co.yumemi.remote.core.infrastructure.RequestConfig
 import jp.co.yumemi.remote.core.infrastructure.RequestMethod
 import jp.co.yumemi.remote.core.infrastructure.wrap
-import jp.co.yumemi.remote.models.HomeApiModel
+import jp.co.yumemi.remote.models.WorkResponseApiModel
 
-interface HomeApi {
-    suspend fun getHomeWorkList(id: Int): HttpResponse<HomeApiModel>
+interface WorkListApi {
+    suspend fun getWorkList(): HttpResponse<WorkResponseApiModel>
 }
 
-class HomeApiImpl(
+class WorkListApiImpl(
     private val apiClient: ApiClient
-) : HomeApi {
-    override suspend fun getHomeWorkList(id: Int): HttpResponse<HomeApiModel> {
+) : WorkListApi {
+    override suspend fun getWorkList(): HttpResponse<WorkResponseApiModel> {
         val headers = mutableMapOf<String, String>()
         val requestConfig = RequestConfig<Any?>(
             method = RequestMethod.GET,

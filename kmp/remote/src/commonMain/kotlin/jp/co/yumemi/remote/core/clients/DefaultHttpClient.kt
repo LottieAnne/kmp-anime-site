@@ -24,7 +24,10 @@ open class DefaultHttpClient(
 ) : ApiClient {
     private val authentications: kotlin.collections.Map<String, jp.co.yumemi.remote.core.auth.Authentication> by lazy {
         mapOf(
-            "apiKey" to jp.co.yumemi.remote.core.auth.ApiKeyAuth(location = "query", paramName = "access_token")
+            "access_token" to jp.co.yumemi.remote.core.auth.ApiKeyAuth(
+                location = "query",
+                paramName = "access_token"
+            )
         )
     }
 
@@ -128,13 +131,17 @@ open class DefaultHttpClient(
     ): HttpResponse =
         request(requestConfig, body, authNames)
 
-    override suspend fun <T : Any?> request(requestConfig: RequestConfig<T>, body: Any?, authNames: kotlin.collections.List<String>): HttpResponse {
+    override suspend fun <T : Any?> request(
+        requestConfig: RequestConfig<T>,
+        body: Any?,
+        authNames: kotlin.collections.List<String>
+    ): HttpResponse {
         requestConfig.updateForAuth<T>(authNames)
         val headers = requestConfig.headers
 
         return client.request {
             this.url {
-                appendPath(listOf("api") + requestConfig.path.trimStart('/').split('/'))
+                appendPath(requestConfig.path.trimStart('/').split('/'))
                 requestConfig.query.forEach { query ->
                     query.value.forEach { value ->
                         parameter(query.key, value)
@@ -142,22 +149,33 @@ open class DefaultHttpClient(
                 }
             }
             this.method = requestConfig.method.httpMethod
-            headers.filter { header -> !UNSAFE_HEADERS.contains(header.key) }.forEach { header -> this.header(header.key, header.value) }
-            if (requestConfig.method in listOf(RequestMethod.PUT, RequestMethod.POST, RequestMethod.PATCH))
+            headers.filter { header -> !UNSAFE_HEADERS.contains(header.key) }
+                .forEach { header -> this.header(header.key, header.value) }
+            if (requestConfig.method in listOf(
+                    RequestMethod.PUT,
+                    RequestMethod.POST,
+                    RequestMethod.PATCH
+                )
+            )
                 this.setBody(body)
         }
     }
 
     private fun <T : Any?> RequestConfig<T>.updateForAuth(authNames: kotlin.collections.List<String>) {
         for (authName in authNames) {
-            val auth = authentications?.get(authName) ?: throw Exception("Authentication undefined: $authName")
+            val auth = authentications?.get(authName)
+                ?: throw Exception("Authentication undefined: $authName")
             auth.apply(query, headers)
         }
     }
 
-    private fun URLBuilder.appendPath(components: kotlin.collections.List<String>): URLBuilder = apply {
-        encodedPath = encodedPath.trimEnd('/') + components.joinToString("/", prefix = "/") { it.encodeURLQueryComponent() }
-    }
+    private fun URLBuilder.appendPath(components: kotlin.collections.List<String>): URLBuilder =
+        apply {
+            encodedPath = encodedPath.trimEnd('/') + components.joinToString(
+                "/",
+                prefix = "/"
+            ) { it.encodeURLQueryComponent() }
+        }
 
     private val RequestMethod.httpMethod: HttpMethod
         get() = when (this) {
