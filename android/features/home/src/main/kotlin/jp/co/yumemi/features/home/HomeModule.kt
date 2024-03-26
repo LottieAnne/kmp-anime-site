@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import jp.co.yumemi.domain.core.ErrorHandler
-import jp.co.yumemi.domain.usecases.HomeUseCase
+import jp.co.yumemi.domain.usecases.GetWorkListUseCase
 import jp.co.yumemi.home.HomeStateMachine
 
 @Module
@@ -13,10 +13,10 @@ import jp.co.yumemi.home.HomeStateMachine
 class HomeModule {
     @Provides
     fun provideHomeStateMachine(
-        homeUseCase: HomeUseCase,
+        getWorkListUseCase: GetWorkListUseCase,
         errorHandler: ErrorHandler,
     ): HomeStateMachine = HomeStateMachine(
-        homeUseCase = homeUseCase,
+        getWorkListUseCase = getWorkListUseCase,
         errorHandler = errorHandler,
     )
 }

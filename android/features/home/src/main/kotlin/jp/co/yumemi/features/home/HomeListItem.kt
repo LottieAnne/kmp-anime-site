@@ -25,7 +25,6 @@ import jp.co.yumemi.core.primitives.Spacing
 
 @Composable
 internal fun HomeListItem(
-    id: Int,
     title: String,
     seasonName: String,
     imageUrl: String?,
@@ -76,7 +75,6 @@ private fun HomeListItemPreview() {
     SampleTheme {
         Surface {
             HomeListItem(
-                id = 1,
                 imageUrl = "http://shirobako-anime.com/images/ogp.jpg",
                 title = "Title Japanese",
                 seasonName = "Season Name",
