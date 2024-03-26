@@ -5,10 +5,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.ServiceComponent
-import jp.co.yumemi.domain.repositories.HomeRepository
 import jp.co.yumemi.domain.repositories.SampleRepository
-import jp.co.yumemi.domain.usecases.HomeExecutor
-import jp.co.yumemi.domain.usecases.HomeUseCase
+import jp.co.yumemi.domain.repositories.WorkRepository
+import jp.co.yumemi.domain.usecases.GetWorkListExecutor
+import jp.co.yumemi.domain.usecases.GetWorkListUseCase
 import jp.co.yumemi.domain.usecases.SampleExecutor
 import jp.co.yumemi.domain.usecases.SampleUseCase
 
@@ -22,6 +22,6 @@ class DomainModule {
 
     @Provides
     fun provideHomeUseCase(
-        homeRepository: HomeRepository,
-    ): HomeUseCase = HomeExecutor(homeRepository = homeRepository)
+        workRepository: WorkRepository,
+    ): GetWorkListUseCase = GetWorkListExecutor(workRepository = workRepository)
 }

@@ -5,13 +5,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.ServiceComponent
-import jp.co.yumemi.data.sources.HomeRemoteDataSource
 import jp.co.yumemi.data.sources.SampleRemoteDataSource
-import jp.co.yumemi.remote.apis.HomeApi
+import jp.co.yumemi.data.sources.WorkRemoteDataSource
 import jp.co.yumemi.remote.apis.SampleApi
+import jp.co.yumemi.remote.apis.WorkListApi
 import jp.co.yumemi.remote.core.exception.RemoteExceptionHandler
-import jp.co.yumemi.remote.providers.HomeRemoteDataProvider
 import jp.co.yumemi.remote.providers.SampleRemoteDataProvider
+import jp.co.yumemi.remote.providers.WorkRemoteDataProvider
 
 @Module
 @InstallIn(ActivityRetainedComponent::class, ServiceComponent::class)
@@ -30,10 +30,10 @@ class RemoteModule {
 
     @Provides
     fun provideHomeRemoteDataSource(
-        homeApi: HomeApi,
+        workListApi: WorkListApi,
         exceptionHandler: RemoteExceptionHandler,
-    ): HomeRemoteDataSource = HomeRemoteDataProvider(
-        homeApi = homeApi,
+    ): WorkRemoteDataSource = WorkRemoteDataProvider(
+        workListApi = workListApi,
         exceptionHandler = exceptionHandler,
     )
 }

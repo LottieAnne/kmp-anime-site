@@ -5,8 +5,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import jp.co.yumemi.application.Config
-import jp.co.yumemi.remote.apis.HomeApi
-import jp.co.yumemi.remote.apis.HomeApiImpl
+import jp.co.yumemi.remote.apis.WorkListApi
+import jp.co.yumemi.remote.apis.WorkListApiImpl
 import jp.co.yumemi.remote.apis.SampleApi
 import jp.co.yumemi.remote.apis.SampleApiImpl
 import jp.co.yumemi.remote.core.clients.ApiClient
@@ -30,5 +30,5 @@ class ApiModule {
     @Provides
     fun provideHomeApi(
         apiClient: ApiClient,
-    ): HomeApi = HomeApiImpl(apiClient = apiClient)
+    ): WorkListApi = WorkListApiImpl(apiClient = apiClient)
 }
