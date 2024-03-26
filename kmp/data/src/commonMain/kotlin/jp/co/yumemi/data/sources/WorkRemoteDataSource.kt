@@ -1,7 +1,7 @@
 package jp.co.yumemi.data.sources
 
-import jp.co.yumemi.data.models.HomeModel
+import jp.co.yumemi.data.models.WorkListModel
 
-interface HomeRemoteDataSource {
-    suspend fun getHomeWorkList(id: Int): List<HomeModel>
+interface WorkRemoteDataSource {
+    suspend fun getWorkList(): List<WorkListModel>
 }
