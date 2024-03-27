@@ -18,18 +18,18 @@ import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.utils.screenPadding
-import jp.co.yumemi.domain.entities.HomeEntity
+import jp.co.yumemi.domain.entities.WorkEntity
 
 @Composable
 fun HomeScreenRoot() {
     HomeScreen(
         homeList = listOf(
-            HomeEntity(
+            WorkEntity(
                 title = "Title Japanese",
                 seasonName = "Season Name",
                 imageUrl = null,
             ),
-            HomeEntity(
+            WorkEntity(
                 title = "Title Japanese",
                 seasonName = "Season Name",
                 imageUrl = null,
@@ -42,7 +42,7 @@ fun HomeScreenRoot() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreen(
-    homeList: List<HomeEntity>,
+    homeList: List<WorkEntity>,
     onClickListCard: () -> Unit,
 ) {
     Scaffold(
@@ -82,37 +82,37 @@ private fun HomeScreenPreview() {
     SampleTheme {
         HomeScreen(
             homeList = listOf(
-                HomeEntity(
+                WorkEntity(
                     title = "Title Japanese",
                     seasonName = "Season Name",
                     imageUrl = null,
                 ),
-                HomeEntity(
+                WorkEntity(
                     title = "Title Japanese",
                     seasonName = "Season Name",
                     imageUrl = null,
                 ),
-                HomeEntity(
+                WorkEntity(
                     title = "Title Japanese",
                     seasonName = "Season Name",
                     imageUrl = null,
                 ),
-                HomeEntity(
+                WorkEntity(
                     title = "Title Japanese",
                     seasonName = "Season Name",
                     imageUrl = null,
                 ),
-                HomeEntity(
+                WorkEntity(
                     title = "Title Japanese",
                     seasonName = "Season Name",
                     imageUrl = null,
                 ),
-                HomeEntity(
+                WorkEntity(
                     title = "Title Japanese",
                     seasonName = "Season Name",
                     imageUrl = null,
                 ),
-                HomeEntity(
+                WorkEntity(
                     title = "Title Japanese",
                     seasonName = "Season Name",
                     imageUrl = null,
