@@ -15,6 +15,7 @@ import io.ktor.http.URLBuilder
 import io.ktor.http.content.PartData
 import io.ktor.http.encodeURLQueryComponent
 import io.ktor.http.encodedPath
+import jp.co.yumemi.remote.core.auth.Authentication
 import jp.co.yumemi.remote.core.auth.OAuth
 import jp.co.yumemi.remote.core.infrastructure.RequestConfig
 import jp.co.yumemi.remote.core.infrastructure.RequestMethod
@@ -22,9 +23,12 @@ import jp.co.yumemi.remote.core.infrastructure.RequestMethod
 open class DefaultHttpClient(
     private val client: HttpClient,
 ) : ApiClient {
-    private val authentications: kotlin.collections.Map<String, jp.co.yumemi.remote.core.auth.Authentication> by lazy {
+    private val authentications: Map<String, Authentication> by lazy {
         mapOf(
-            "basicAuth" to jp.co.yumemi.remote.core.auth.HttpBasicAuth()
+            "access_token" to jp.co.yumemi.remote.core.auth.ApiKeyAuth(
+                location = "query",
+                paramName = "access_token"
+            )
         )
     }
 
@@ -107,8 +111,8 @@ open class DefaultHttpClient(
 
     override suspend fun <T : Any?> multipartFormRequest(
         requestConfig: RequestConfig<T>,
-        body: kotlin.collections.List<PartData>?,
-        authNames: kotlin.collections.List<String>,
+        body: List<PartData>?,
+        authNames: List<String>,
     ): HttpResponse {
         return request(requestConfig, MultiPartFormDataContent(body ?: listOf()), authNames)
     }
@@ -116,7 +120,7 @@ open class DefaultHttpClient(
     override suspend fun <T : Any?> urlEncodedFormRequest(
         requestConfig: RequestConfig<T>,
         body: Parameters?,
-        authNames: kotlin.collections.List<String>,
+        authNames: List<String>,
     ): HttpResponse {
         return request(requestConfig, FormDataContent(body ?: Parameters.Empty), authNames)
     }
@@ -124,17 +128,21 @@ open class DefaultHttpClient(
     override suspend fun <T : Any?> jsonRequest(
         requestConfig: RequestConfig<T>,
         body: Any?,
-        authNames: kotlin.collections.List<String>
+        authNames: List<String>
     ): HttpResponse =
         request(requestConfig, body, authNames)
 
-    override suspend fun <T : Any?> request(requestConfig: RequestConfig<T>, body: Any?, authNames: kotlin.collections.List<String>): HttpResponse {
+    override suspend fun <T : Any?> request(
+        requestConfig: RequestConfig<T>,
+        body: Any?,
+        authNames: List<String>
+    ): HttpResponse {
         requestConfig.updateForAuth<T>(authNames)
         val headers = requestConfig.headers
 
         return client.request {
             this.url {
-                appendPath(listOf("api") + requestConfig.path.trimStart('/').split('/'))
+                appendPath(requestConfig.path.trimStart('/').split('/'))
                 requestConfig.query.forEach { query ->
                     query.value.forEach { value ->
                         parameter(query.key, value)
@@ -142,22 +150,33 @@ open class DefaultHttpClient(
                 }
             }
             this.method = requestConfig.method.httpMethod
-            headers.filter { header -> !UNSAFE_HEADERS.contains(header.key) }.forEach { header -> this.header(header.key, header.value) }
-            if (requestConfig.method in listOf(RequestMethod.PUT, RequestMethod.POST, RequestMethod.PATCH))
+            headers.filter { header -> !UNSAFE_HEADERS.contains(header.key) }
+                .forEach { header -> this.header(header.key, header.value) }
+            if (requestConfig.method in listOf(
+                    RequestMethod.PUT,
+                    RequestMethod.POST,
+                    RequestMethod.PATCH
+                )
+            )
                 this.setBody(body)
         }
     }
 
-    private fun <T : Any?> RequestConfig<T>.updateForAuth(authNames: kotlin.collections.List<String>) {
+    private fun <T : Any?> RequestConfig<T>.updateForAuth(authNames: List<String>) {
         for (authName in authNames) {
-            val auth = authentications?.get(authName) ?: throw Exception("Authentication undefined: $authName")
+            val auth = authentications?.get(authName)
+                ?: throw Exception("Authentication undefined: $authName")
             auth.apply(query, headers)
         }
     }
 
-    private fun URLBuilder.appendPath(components: kotlin.collections.List<String>): URLBuilder = apply {
-        encodedPath = encodedPath.trimEnd('/') + components.joinToString("/", prefix = "/") { it.encodeURLQueryComponent() }
-    }
+    private fun URLBuilder.appendPath(components: List<String>): URLBuilder =
+        apply {
+            encodedPath = encodedPath.trimEnd('/') + components.joinToString(
+                "/",
+                prefix = "/"
+            ) { it.encodeURLQueryComponent() }
+        }
 
     private val RequestMethod.httpMethod: HttpMethod
         get() = when (this) {
