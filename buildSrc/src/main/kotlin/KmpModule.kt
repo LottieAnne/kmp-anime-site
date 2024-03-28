@@ -10,6 +10,7 @@ sealed interface KmpModule : Module {
 
     enum class Feature(override val path: String) : KmpModule {
         Sample(":kmp:presentation:sample-shared"),
-        Home(":kmp:presentation:home-shared")
+        Home(":kmp:presentation:home-shared"),
+        Splash(":kmp:presentation:splash-shared")
     }
 }
