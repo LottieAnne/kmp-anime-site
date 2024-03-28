@@ -7,7 +7,7 @@ import jp.co.yumemi.domain.repositories.WorkListRepository
 interface GetWorkListUseCase : UseCase<Unit, List<WorkEntity>>
 
 class GetWorkListExecutor(
-    private val workRepository: WorkListRepository,
+    private val workListRepository: WorkListRepository,
 ) : GetWorkListUseCase {
-    override suspend fun execute(arguments: Unit): List<WorkEntity> = workRepository.getWorkList()
+    override suspend fun execute(arguments: Unit): List<WorkEntity> = workListRepository.getWorkList()
 }

@@ -4,12 +4,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import jp.co.yumemi.application.Config
 import jp.co.yumemi.remote.apis.SampleApi
 import jp.co.yumemi.remote.apis.SampleApiImpl
+import jp.co.yumemi.remote.apis.WorkListApi
+import jp.co.yumemi.remote.apis.WorkListApiImpl
 import jp.co.yumemi.remote.core.clients.ApiClient
 import jp.co.yumemi.remote.core.factory.DefaultApiClientFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -24,4 +26,9 @@ class ApiModule {
     fun provideSampleApi(
         apiClient: ApiClient,
     ): SampleApi = SampleApiImpl(apiClient = apiClient)
+
+    @Provides
+    fun provideHomeApi(
+        apiClient: ApiClient,
+    ): WorkListApi = WorkListApiImpl(apiClient = apiClient)
 }
