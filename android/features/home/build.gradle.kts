@@ -14,7 +14,7 @@ dependencies {
     mppBase()
     modules(
         AndroidModule.Base.Core,
-        KmpModule.Feature.Sample,
+        KmpModule.Feature.Home,
     )
     implementations(
         libs.kotlinx.coroutinesCore,
