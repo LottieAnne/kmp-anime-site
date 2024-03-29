@@ -6,5 +6,5 @@ import tech.fika.macaron.core.contract.State
 
 sealed class TutorialState: State, Parcelable {
     @Parcelize
-    data object Tutorial: TutorialState()
+    data object Stable: TutorialState()
 }
