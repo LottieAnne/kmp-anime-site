@@ -49,6 +49,7 @@ include(":kmp:local")
 include(":kmp:utils")
 include(":kmp:ios")
 include(":kmp:presentation:sample-shared")
+include(":kmp:presentation:tutorial-shared")
 include(":kmp:presentation:home-shared")
 include(":kmp:presentation:splash-shared")
 
