@@ -6,7 +6,11 @@ import jp.co.yumemi.features.splash.SplashNavigator
 class SplashNavigation : SplashNavigator {
     override lateinit var navController: NavController
 
-//    override fun home() {
-//        navController.navigate(AppNavGraphDirections.actionHome())
-//    }
+    override fun tutorial() {
+        navController.navigate(AppNavGraphDirections.actionFromSplashToTutorial())
+    }
+
+    override fun workList() {
+        navController.navigate(AppNavGraphDirections.actionFromSplashToWorkList())
+    }
 }
