@@ -49,6 +49,7 @@ include(":kmp:utils")
 include(":kmp:ios")
 include(":kmp:presentation:sample-shared")
 include(":kmp:presentation:home-shared")
+include(":kmp:presentation:splash-shared")
 
 fun getProperty(key: String, default: String? = null): String = System.getProperty(key)
     ?: System.getenv(key)
