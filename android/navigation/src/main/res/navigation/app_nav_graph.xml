@@ -5,31 +5,12 @@
     app:startDestination="@id/tutorial_nav_graph">
 
     <include app:graph="@navigation/sample_nav_graph" />
+    <include app:graph="@navigation/splash_nav_graph" />
     <include app:graph="@navigation/tutorial_nav_graph" />
+    <include app:graph="@navigation/home_nav_graph" />
 
-
-    <!--    <include app:graph="@navigation/sample_nav_graph" />-->
-    <!--    <include app:graph="@navigation/tutorial_nav_graph" />-->
-    <!--    <include app:graph="@navigation/home_nav_graph" />-->
-    <!--    <include app:graph="@navigation/splash_nav_graph" />-->
-
-    <!--    <action-->
-    <!--        android:id="@+id/action_splash"-->
-    <!--        app:destination="@+id/splash_nav_graph" />-->
-
-    <!--    <action-->
-    <!--        android:id="@+id/action_tutorial"-->
-    <!--        app:destination="@+id/tutorial_nav_graph"-->
-    <!--        app:popUpTo="@+id/splash_fragment"-->
-    <!--        app:popUpToInclusive="true"-->
-    <!--        >-->
-    <!--    </action>-->
-
-    <!--    <action-->
-    <!--        android:id="@+id/action_home"-->
-    <!--        app:destination="@+id/home_nav_graph"-->
-    <!--        app:launchSingleTop="true"-->
-    <!--        app:popUpTo="@+id/splash"-->
-    <!--        app:popUpToInclusive="true" />-->
+    <action
+        android:id="@+id/action_tutorial_to_work_list"
+        app:destination="@+id/home_nav_graph" />
 
 </navigation>
