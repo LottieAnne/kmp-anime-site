@@ -20,13 +20,41 @@ import androidx.compose.ui.unit.dp
 import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.Button
 import jp.co.yumemi.core.components.CommonTopAppBar
+import jp.co.yumemi.core.foundation.Contract
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.primitives.Spacing
+import jp.co.yumemi.core.utils.handleEvents
+import jp.co.yumemi.core.utils.render
 import jp.co.yumemi.core.utils.screenPadding
+import jp.co.yumemi.tutorial.TutorialEvent
+import jp.co.yumemi.tutorial.TutorialIntent
+import jp.co.yumemi.tutorial.TutorialState
+
+@Composable
+fun TutorialScreenRoot(
+    contract: Contract<TutorialIntent, TutorialState, TutorialEvent>,
+    navigator: TutorialNavigator,
+) {
+    val (state, dispatch) = contract
+
+    contract.handleEvents { event ->
+        when (event) {
+            is TutorialEvent.NavigateList -> navigator.workList()
+        }
+    }
+
+    TutorialScreen(
+        state = state,
+        dispatch = dispatch
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun TutorialScreen() {
+internal fun TutorialScreen(
+    state: TutorialState,
+    dispatch: (TutorialIntent) -> Unit,
+) {
     Scaffold(
         topBar = {
             CommonTopAppBar(title = stringResource(R.string.tutorial_title))
@@ -40,11 +68,16 @@ internal fun TutorialScreen() {
                 .background(color = SampleTheme.colors.background)
                 .padding(paddingValues = contentPadding),
         ) {
+            state.render<TutorialState.Stable> {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.padding(vertical = Spacing.XXXL)
                 ) {
-                    Box(modifier = Modifier.size(200.dp).background(color = Color.LightGray))
+                    Box(
+                        modifier = Modifier
+                            .size(200.dp)
+                            .background(color = Color.LightGray)
+                    )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
                         text = stringResource(id = R.string.tutorial_body),
@@ -59,9 +92,12 @@ internal fun TutorialScreen() {
                         style = SampleTheme.typography.headline1
                     )
                     Spacer(modifier = Modifier.weight(3f))
-                    Button(text = stringResource(R.string.tutorial_start), onClick = {})
+                    Button(
+                        text = stringResource(R.string.tutorial_start),
+                        onClick = { dispatch(TutorialIntent.ClickStart) })
                 }
             }
+        }
     }
 }
 
@@ -69,6 +105,9 @@ internal fun TutorialScreen() {
 @Composable
 private fun TutorialScreenPreview() {
     SampleTheme {
-        TutorialScreen()
+        TutorialScreen(
+            state = TutorialState.Stable,
+            dispatch = {},
+        )
     }
 }
