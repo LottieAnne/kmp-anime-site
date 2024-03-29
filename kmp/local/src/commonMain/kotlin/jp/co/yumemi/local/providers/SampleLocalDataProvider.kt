@@ -1,7 +1,6 @@
 package jp.co.yumemi.local.providers
 
 import com.russhwolf.settings.Settings
-import jp.co.yumemi.data.core.ExceptionHandler
 import jp.co.yumemi.data.core.runHandling
 import jp.co.yumemi.data.models.SampleModel
 import jp.co.yumemi.data.sources.SampleLocalDataSource

@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_nav_graph"
-    app:startDestination="@id/navigation"
-    >
+    app:startDestination="@id/splash_nav_graph">
 
-    <navigation android:id="@+id/navigation"
-        app:startDestination="@id/home_nav_graph">
-        <include app:graph="@navigation/sample_nav_graph" />
-        <include app:graph="@navigation/home_nav_graph" />
-    </navigation>
+    <include app:graph="@navigation/sample_nav_graph" />
+    <include app:graph="@navigation/home_nav_graph" />
+    <include app:graph="@navigation/splash_nav_graph" />
+
+    <action
+        android:id="@+id/action_splash"
+        app:destination="@+id/splash_nav_graph" />
+
+    <action
+        android:id="@+id/action_home"
+        app:destination="@+id/home_nav_graph"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/splash"
+        app:popUpToInclusive="true" />
 </navigation>
