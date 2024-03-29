@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tutorial_nav_graph"
+    app:startDestination="@id/tutorial_fragment"
+    >
+
+    <fragment
+        android:id="@+id/tutorial_fragment"
+        android:name="jp.co.yumemi.features.tutorial.TutorialFragment"
+        android:label="TutorialFragment"
+        >
+        <action
+            android:id="@+id/action_tutorial_to_work_list"
+            app:destination="@+id/next" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/next"
+        android:name="jp.co.yumemi.features.next.NextFragment"
+        android:label="Next" />
+
+</navigation>
