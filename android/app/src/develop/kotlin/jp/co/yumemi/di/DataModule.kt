@@ -6,11 +6,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.ServiceComponent
 import jp.co.yumemi.data.repositories.SampleDataRepository
+import jp.co.yumemi.data.repositories.SplashDataRepository
 import jp.co.yumemi.data.repositories.WorkListDataRepository
 import jp.co.yumemi.data.sources.SampleLocalDataSource
 import jp.co.yumemi.data.sources.SampleRemoteDataSource
+import jp.co.yumemi.data.sources.SplashLocalDataSource
 import jp.co.yumemi.data.sources.WorkListRemoteDataSource
 import jp.co.yumemi.domain.repositories.SampleRepository
+import jp.co.yumemi.domain.repositories.SplashRepository
 import jp.co.yumemi.domain.repositories.WorkListRepository
 
 @Module
@@ -23,6 +26,13 @@ class DataModule {
     ): SampleRepository = SampleDataRepository(
         sampleLocalDataSource = sampleLocalDataSource,
         sampleRemoteDataSource = sampleRemoteDataSource
+    )
+
+    @Provides
+    fun provideSplashRepository(
+        splashLocalDataSource: SplashLocalDataSource,
+    ): SplashRepository = SplashDataRepository(
+        splashLocalDataSource = splashLocalDataSource,
     )
 
     @Provides
