@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/splash_nav_graph"
-    app:startDestination="@id/splash">
+    app:startDestination="@id/splash_fragment">
 
     <fragment
-        android:id="@+id/splash"
+        android:id="@+id/splash_fragment"
         android:name="jp.co.yumemi.features.splash.SplashFragment"
-        android:label="Splash">
+        android:label="SplashFragment">
     </fragment>
 </navigation>
