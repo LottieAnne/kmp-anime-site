@@ -7,7 +7,7 @@ import jp.co.yumemi.utils.Parcelize
  * 作品詳細画面
  */
 @Parcelize
-data class WorkDetailEntity(
+data class WorkDetailsEntity(
     /** 作品のタイトル */
     val title: String,
     /** 作品のリリース時期 */
