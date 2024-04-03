@@ -9,7 +9,7 @@ import jp.co.yumemi.utils.Parcelize
 @Parcelize
 data class WorkEpisodeEntity(
     /** エピソード数 */
-    val episodeNumber: Int,
+    val episodeNumber: String,
     /** エピソードタイトル */
     val episodeTitle: String,
 ) : Parcelable
