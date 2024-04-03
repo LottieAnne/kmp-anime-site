@@ -103,27 +103,27 @@ private fun AnimeListDetailScreenPreview() {
             ),
             workEpisode = listOf(
                 WorkEpisodeEntity(
-                    episodeNumber = 1,
+                    episodeNumber = "第1話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 2,
+                    episodeNumber = "第2話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 3,
+                    episodeNumber = "第3話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 4,
+                    episodeNumber = "第4話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 5,
+                    episodeNumber = "第5話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 6,
+                    episodeNumber = "第6話",
                     episodeTitle = "Title Episode Japanese"
                 ),
             )

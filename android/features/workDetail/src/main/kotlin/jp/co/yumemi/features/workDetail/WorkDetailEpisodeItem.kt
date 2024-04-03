@@ -16,7 +16,7 @@ import jp.co.yumemi.core.primitives.Spacing
 
 @Composable
 internal fun WorkDetailEpisodeItem(
-    episodeNumber: Int,
+    episodeNumber: String,
     episodeTitle: String,
     modifier: Modifier = Modifier,
 ) {
@@ -27,7 +27,7 @@ internal fun WorkDetailEpisodeItem(
             .padding(vertical = Spacing.XS, horizontal = Spacing.S),
     ) {
         Text(
-            text = "$episodeNumber.",
+            text = episodeNumber,
             color = SampleTheme.colors.onBackground,
             style = SampleTheme.typography.body2
         )
@@ -44,6 +44,6 @@ internal fun WorkDetailEpisodeItem(
 @Composable
 private fun WorkDetailEpisodePreview() {
     SampleTheme {
-        WorkDetailEpisodeItem(episodeNumber = 1, episodeTitle = "Title Japanese")
+        WorkDetailEpisodeItem(episodeNumber = "第2話", episodeTitle = "Title Japanese")
     }
 }
