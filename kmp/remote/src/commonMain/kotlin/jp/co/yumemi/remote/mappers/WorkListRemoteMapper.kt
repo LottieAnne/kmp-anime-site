@@ -6,9 +6,13 @@ import jp.co.yumemi.remote.models.WorkListResponseApiModel
 
 internal object WorkListRemoteMapper {
     fun toDataModel(apiModel: WorkApiModel) = WorkListModel(
+        id = apiModel.id,
         title = apiModel.title,
         seasonName = apiModel.seasonName,
         imageUrl = apiModel.image.imageUrl,
+        episodes = apiModel.episodes,
+        watchers = apiModel.watchers,
+        reviews = apiModel.reviews,
     )
 
     fun toDataModel(apiModel: WorkListResponseApiModel): List<WorkListModel> =
