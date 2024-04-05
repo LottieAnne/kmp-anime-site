@@ -1,4 +1,4 @@
-package jp.co.yumemi.features.workDetail
+package jp.co.yumemi.features.workDetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -13,7 +13,7 @@ import jp.co.yumemi.core.primitives.Spacing
 
 
 @Composable
-internal fun WorkDetailHeader(
+internal fun WorkDetailsHeader(
     title: String,
     modifier: Modifier = Modifier,
 ) {
@@ -33,9 +33,9 @@ internal fun WorkDetailHeader(
 
 @Preview
 @Composable
-private fun WorkDetailHeaderPreview() {
+private fun WorkDetailsHeaderPreview() {
     SampleTheme {
-        WorkDetailHeader(
+        WorkDetailsHeader(
             title = "詳細"
         )
     }

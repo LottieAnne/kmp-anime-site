@@ -1,4 +1,4 @@
-package jp.co.yumemi.features.workDetail
+package jp.co.yumemi.features.workDetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import jp.co.yumemi.core.primitives.Spacing
 
 
 @Composable
-internal fun WorkDetailSection(
+internal fun WorkInfoSection(
     seasonName: String,
     episodes: Int,
     watchers: Int,
@@ -25,18 +25,18 @@ internal fun WorkDetailSection(
             .background(color = SampleTheme.colors.background)
             .padding(vertical = Spacing.XS)
     ) {
-        WorkDetailItem(content = "リリース時期", description = seasonName)
-        WorkDetailItem(content = "エピソード数" , description = episodes.toString() )
-        WorkDetailItem(content ="見た人の数" , description = watchers.toString())
-        WorkDetailItem(content ="レビュー数" , description = reviews.toString())
+        WorkDetailsItem(content = "リリース時期", description = seasonName)
+        WorkDetailsItem(content = "エピソード数" , description = episodes.toString() )
+        WorkDetailsItem(content ="見た人の数" , description = watchers.toString())
+        WorkDetailsItem(content ="レビュー数" , description = reviews.toString())
     }
 }
 
 @Preview
 @Composable
-private fun WorkDetailSectionPreview() {
+private fun WorkInfoSectionPreview() {
     SampleTheme {
-        WorkDetailSection(
+        WorkInfoSection(
             seasonName = "2014年秋",
             episodes = 24,
             watchers = 1254,
