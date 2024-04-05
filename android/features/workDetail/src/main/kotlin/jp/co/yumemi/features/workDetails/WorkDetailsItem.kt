@@ -1,6 +1,7 @@
-package jp.co.yumemi.features.workDetail
+package jp.co.yumemi.features.workDetails
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,25 +16,26 @@ import jp.co.yumemi.core.primitives.Spacing
 
 
 @Composable
-internal fun WorkDetailEpisodeItem(
-    episodeNumber: Int,
-    episodeTitle: String,
+internal fun WorkDetailsItem(
+    content: String,
+    description: String,
     modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = SampleTheme.colors.background)
+            .background(color = SampleTheme.colors.onPrimary)
             .padding(vertical = Spacing.XS, horizontal = Spacing.S),
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
-            text = "$episodeNumber.",
+            text = content,
             color = SampleTheme.colors.onBackground,
             style = SampleTheme.typography.body2
         )
         Spacer(modifier = Modifier.width(Spacing.S))
         Text(
-            text = episodeTitle,
+            text = description,
             color = SampleTheme.colors.onBackground,
             style = SampleTheme.typography.body3
         )
@@ -42,8 +44,11 @@ internal fun WorkDetailEpisodeItem(
 
 @Preview
 @Composable
-private fun WorkDetailEpisodePreview() {
+private fun WorkDetailsItemPreview() {
     SampleTheme {
-        WorkDetailEpisodeItem(episodeNumber = 1, episodeTitle = "Title Japanese")
+        WorkDetailsItem(
+            content = "リリース時期",
+            description = "2014年秋"
+        )
     }
 }

@@ -1,4 +1,4 @@
-package jp.co.yumemi.features.workDetail
+package jp.co.yumemi.features.workDetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,13 +24,13 @@ import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.utils.screenPadding
-import jp.co.yumemi.domain.entities.WorkDetailEntity
 import jp.co.yumemi.domain.entities.WorkEpisodeEntity
+import jp.co.yumemi.domain.entities.WorkInfoEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnimeListDetailScreen(
-    workDetail: WorkDetailEntity,
+fun WorkDetailsScreen(
+    workDetail: WorkInfoEntity,
     workEpisode: List<WorkEpisodeEntity>,
 ) {
     Scaffold(
@@ -70,16 +70,16 @@ fun AnimeListDetailScreen(
                     title = workDetail.title,
                     seasonName = workDetail.seasonName
                 )
-                WorkDetailHeader(title = stringResource(id = R.string.work_detail_title))
-                WorkDetailSection(
+                WorkDetailsHeader(title = stringResource(id = R.string.work_detail_title))
+                WorkInfoSection(
                     seasonName = workDetail.seasonName,
                     episodes = workDetail.episodes,
                     watchers = workDetail.watchers,
                     reviews = workDetail.reviews,
                 )
-                WorkDetailHeader(title = stringResource(id = R.string.work_detail_episode))
+                WorkDetailsHeader(title = stringResource(id = R.string.work_detail_episode))
                 workEpisode.forEach { episode ->
-                    WorkDetailEpisodeItem(
+                    WorkEpisodeItem(
                         episodeNumber = episode.episodeNumber,
                         episodeTitle = episode.episodeTitle
                     )
@@ -91,10 +91,10 @@ fun AnimeListDetailScreen(
 
 @Preview
 @Composable
-private fun AnimeListDetailScreenPreview() {
+private fun WorkDetailsScreenPreview() {
     SampleTheme {
-        AnimeListDetailScreen(
-            workDetail = WorkDetailEntity(
+        WorkDetailsScreen(
+            workDetail = WorkInfoEntity(
                 title = "Title Japanese",
                 seasonName = "2014年秋",
                 episodes = 24,
@@ -103,27 +103,27 @@ private fun AnimeListDetailScreenPreview() {
             ),
             workEpisode = listOf(
                 WorkEpisodeEntity(
-                    episodeNumber = 1,
+                    episodeNumber = "第1話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 2,
+                    episodeNumber = "第2話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 3,
+                    episodeNumber = "第3話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 4,
+                    episodeNumber = "第4話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 5,
+                    episodeNumber = "第5話",
                     episodeTitle = "Title Episode Japanese"
                 ),
                 WorkEpisodeEntity(
-                    episodeNumber = 6,
+                    episodeNumber = "第6話",
                     episodeTitle = "Title Episode Japanese"
                 ),
             )

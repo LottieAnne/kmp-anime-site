@@ -1,4 +1,4 @@
-package jp.co.yumemi.features.workDetail
+package jp.co.yumemi.features.workDetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
