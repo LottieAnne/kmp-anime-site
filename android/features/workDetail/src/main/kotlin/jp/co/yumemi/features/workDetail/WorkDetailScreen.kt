@@ -24,13 +24,13 @@ import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.utils.screenPadding
-import jp.co.yumemi.domain.entities.WorkDetailEntity
+import jp.co.yumemi.domain.entities.WorkDetailsEntity
 import jp.co.yumemi.domain.entities.WorkEpisodeEntity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AnimeListDetailScreen(
-    workDetail: WorkDetailEntity,
+    workDetail: WorkDetailsEntity,
     workEpisode: List<WorkEpisodeEntity>,
 ) {
     Scaffold(
@@ -94,7 +94,7 @@ fun AnimeListDetailScreen(
 private fun AnimeListDetailScreenPreview() {
     SampleTheme {
         AnimeListDetailScreen(
-            workDetail = WorkDetailEntity(
+            workDetail = WorkDetailsEntity(
                 title = "Title Japanese",
                 seasonName = "2014年秋",
                 episodes = 24,
