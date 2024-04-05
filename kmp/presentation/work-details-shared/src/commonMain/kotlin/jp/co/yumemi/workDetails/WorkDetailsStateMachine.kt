@@ -1,18 +1,13 @@
 package jp.co.yumemi.workDetails
 
 import jp.co.yumemi.domain.core.ErrorHandler
-import jp.co.yumemi.domain.core.execute
 import jp.co.yumemi.domain.core.runHandling
 import jp.co.yumemi.domain.usecases.GetWorkEpisodeListUseCase
-import jp.co.yumemi.domain.usecases.GetWorkInfoUseCase
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import tech.fika.macaron.statemachine.components.StateMachine
 import tech.fika.macaron.statemachine.components.event
 import tech.fika.macaron.statemachine.components.result
 
 class WorkDetailsStateMachine(
-    private val getWorkInfoUseCase: GetWorkInfoUseCase,
     private val getWorkEpisodeListUseCase: GetWorkEpisodeListUseCase,
     private val errorHandler: ErrorHandler,
 ) : StateMachine<WorkDetailsIntent, WorkDetailsAction, WorkDetailsResult, WorkDetailsState, WorkDetailsEvent>(
@@ -22,40 +17,41 @@ class WorkDetailsStateMachine(
 
             process<WorkDetailsAction.NavigateBack> { event(WorkDetailsEvent.NavigateBack) }
         }
-
+//
         state<WorkDetailsState.Initial> {
             interpret<WorkDetailsIntent.OnStart> { WorkDetailsAction.GetWorkDetails }
 
             process<WorkDetailsAction.GetWorkDetails> {
                 result(WorkDetailsResult.Loading)
                 runHandling(errorHandler) {
-                    coroutineScope {
-                        val workInfo = async { getWorkInfoUseCase.execute() }
-                        val workEpisodeList = async { getWorkEpisodeListUseCase.execute() }
-
-                        WorkDetailsResult.GetWorkDetailsSuccess(
-                            workInfo = workInfo.await(),
-                            workEpisodeList = workEpisodeList.await(),
-                        )
-                    }
+                    getWorkEpisodeListUseCase.execute(arguments = GetWorkEpisodeListUseCase.Args(id = it.state.work.id))
                 }.onSuccess {
-                    result(it)
+                    result(
+                        WorkDetailsResult.GetWorkDetailsSuccess(
+                            workEpisodeList = it,
+                        )
+                    )
                 }.onFailure {
                     result(WorkDetailsResult.GetWorkDetailsError(error = it))
                 }
             }
 
-            reduce<WorkDetailsResult.Loading> { WorkDetailsState.Loading }
+            reduce<WorkDetailsResult.Loading> { WorkDetailsState.Loading(work = state.work) }
         }
 
         state<WorkDetailsState.Loading> {
             reduce<WorkDetailsResult.GetWorkDetailsSuccess> {
                 WorkDetailsState.Stable(
-                    workInfo = result.workInfo,
+                    work = state.work,
                     workEpisodeList = result.workEpisodeList
                 )
             }
-            reduce<WorkDetailsResult.GetWorkDetailsError> { WorkDetailsState.Error(error = result.error) }
+            reduce<WorkDetailsResult.GetWorkDetailsError> {
+                WorkDetailsState.Error(
+                    work = state.work,
+                    error = result.error
+                )
+            }
         }
     }
 )
