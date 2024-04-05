@@ -13,4 +13,10 @@ data class WorkApiModel(
     val seasonName: String,
     @SerialName(value = "images")
     val image: ImageApiModel,
+    @SerialName(value = "episodes_count")
+    val episodes: Int,
+    @SerialName(value = "watchers_count")
+    val watchers: Int,
+    @SerialName(value = "reviews_count")
+    val reviews: Int,
 )
