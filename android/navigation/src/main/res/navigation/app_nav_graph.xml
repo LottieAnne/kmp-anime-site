@@ -12,7 +12,6 @@
     <action
         android:id="@+id/action_from_splash_to_tutorial"
         app:destination="@+id/tutorial_nav_graph"
-        app:launchSingleTop="true"
         app:popUpTo="@+id/splash_fragment"
         app:popUpToInclusive="true"
         />
