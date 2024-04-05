@@ -9,18 +9,19 @@ import jp.co.yumemi.remote.models.WorkEpisodeListResponseApiModel
 
 
 interface WorkEpisodeListApi {
-    suspend fun getWorkEpisodeList(): HttpResponse<WorkEpisodeListResponseApiModel>
+    suspend fun getWorkEpisodeList(id: Int): HttpResponse<WorkEpisodeListResponseApiModel>
 }
 
 class WorkEpisodeListApiImpl(
     private val apiClient: ApiClient
 ) : WorkEpisodeListApi {
-    override suspend fun getWorkEpisodeList(): HttpResponse<WorkEpisodeListResponseApiModel> {
+    override suspend fun getWorkEpisodeList(id: Int): HttpResponse<WorkEpisodeListResponseApiModel> {
         val headers = mutableMapOf<String, String>()
         val requestConfig = RequestConfig<Any?>(
             method = RequestMethod.GET,
             path = "/v1/episodes",
             headers = headers,
+            query = mutableMapOf("filter_work_id" to listOf(id.toString())),
             body = null
         )
         val authNames = listOf("access_token")
