@@ -3,10 +3,10 @@ package jp.co.yumemi.workDetails
 import jp.co.yumemi.domain.core.ErrorHandler
 import jp.co.yumemi.domain.core.execute
 import jp.co.yumemi.domain.core.runHandling
-import jp.co.yumemi.domain.entities.WorkInfoEntity
 import jp.co.yumemi.domain.usecases.GetWorkEpisodeListUseCase
 import jp.co.yumemi.domain.usecases.GetWorkInfoUseCase
-import jp.co.yumemi.domain.usecases.GetWorkListUseCase
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import tech.fika.macaron.statemachine.components.StateMachine
 import tech.fika.macaron.statemachine.components.event
 import tech.fika.macaron.statemachine.components.result
@@ -22,10 +22,28 @@ class WorkDetailsStateMachine(
 
             process<WorkDetailsAction.NavigateBack> { event(WorkDetailsEvent.NavigateBack) }
         }
+
         state<WorkDetailsState.Initial> {
             interpret<WorkDetailsIntent.OnStart> { WorkDetailsAction.GetWorkDetails }
 
-            // TODO: process実装
+            process<WorkDetailsAction.GetWorkDetails> {
+                result(WorkDetailsResult.Loading)
+                runHandling(errorHandler) {
+                    coroutineScope {
+                        val workInfo = async { getWorkInfoUseCase.execute() }
+                        val workEpisodeList = async { getWorkEpisodeListUseCase.execute() }
+
+                        WorkDetailsResult.GetWorkDetailsSuccess(
+                            workInfo = workInfo.await(),
+                            workEpisodeList = workEpisodeList.await(),
+                        )
+                    }
+                }.onSuccess {
+                    result(it)
+                }.onFailure {
+                    result(WorkDetailsResult.GetWorkDetailsError(error = it))
+                }
+            }
 
             reduce<WorkDetailsResult.Loading> { WorkDetailsState.Loading }
         }
