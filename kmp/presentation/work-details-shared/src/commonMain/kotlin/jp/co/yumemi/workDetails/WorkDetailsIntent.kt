@@ -5,4 +5,5 @@ import tech.fika.macaron.core.contract.Intent
 
 sealed class WorkDetailsIntent : Intent {
     data object OnStart: WorkDetailsIntent()
+    data object ClickBack: WorkDetailsIntent()
 }

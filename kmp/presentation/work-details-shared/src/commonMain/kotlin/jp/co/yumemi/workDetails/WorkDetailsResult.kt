@@ -8,8 +8,11 @@ import tech.fika.macaron.core.contract.Result
 
 sealed class WorkDetailsResult : Result {
     data object Loading : WorkDetailsResult()
-    data class GetWorkInfoSuccess(val workInfo: WorkInfoEntity) : WorkDetailsResult()
-    data class GetWorkInfoError(val error: DomainError) : WorkDetailsResult()
-    data class GetWorkEpisodeListSuccess(val workEpisodeList: List<WorkEpisodeEntity>) : WorkDetailsResult()
-    data class GetWorkEpisodeListError(val error: DomainError) : WorkDetailsResult()
+
+    data class GetWorkDetailsSuccess(
+        val workInfo: WorkInfoEntity,
+        val workEpisodeList: List<WorkEpisodeEntity>
+    ) : WorkDetailsResult()
+
+    data class GetWorkDetailsError(val error: DomainError) : WorkDetailsResult()
 }
