@@ -97,39 +97,49 @@ private fun HomeScreenPreview() {
             state = HomeState.Stable(
                 workList = listOf(
                     WorkEntity(
+                        id = 1,
                         title = "Title Japanese",
                         seasonName = "Season Name",
                         imageUrl = null,
+                        episodes = 24,
+                        watchers = 100,
+                        reviews = 50
                     ),
                     WorkEntity(
+                        id = 1,
                         title = "Title Japanese",
                         seasonName = "Season Name",
                         imageUrl = null,
+                        episodes = 24,
+                        watchers = 100,
+                        reviews = 50
                     ),
                     WorkEntity(
+                        id = 1,
                         title = "Title Japanese",
                         seasonName = "Season Name",
                         imageUrl = null,
+                        episodes = 24,
+                        watchers = 100,
+                        reviews = 50
                     ),
                     WorkEntity(
+                        id = 1,
                         title = "Title Japanese",
                         seasonName = "Season Name",
                         imageUrl = null,
+                        episodes = 24,
+                        watchers = 100,
+                        reviews = 50
                     ),
                     WorkEntity(
+                        id = 1,
                         title = "Title Japanese",
                         seasonName = "Season Name",
                         imageUrl = null,
-                    ),
-                    WorkEntity(
-                        title = "Title Japanese",
-                        seasonName = "Season Name",
-                        imageUrl = null,
-                    ),
-                    WorkEntity(
-                        title = "Title Japanese",
-                        seasonName = "Season Name",
-                        imageUrl = null,
+                        episodes = 24,
+                        watchers = 100,
+                        reviews = 50
                     ),
                 ),
             ),
