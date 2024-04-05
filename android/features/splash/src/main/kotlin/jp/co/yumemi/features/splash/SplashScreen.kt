@@ -7,28 +7,48 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import jp.co.yumemi.core.R
+import jp.co.yumemi.core.foundation.Contract
 import jp.co.yumemi.core.primitives.SampleTheme
+import jp.co.yumemi.core.utils.handleEvents
+import jp.co.yumemi.core.utils.render
 import jp.co.yumemi.core.utils.screenPadding
+import jp.co.yumemi.splash.SplashEvent
+import jp.co.yumemi.splash.SplashIntent
+import jp.co.yumemi.splash.SplashState
 
 @Composable
 fun SplashScreenRoot(
+    contract: Contract<SplashIntent, SplashState, SplashEvent>,
     navigator: SplashNavigator,
 ) {
-//    navigator.home()// TODO 後で削除
-    SplashScreen(navigator)
+    val (state, dispatch) = contract
+
+    LaunchedEffect(Unit) {
+        dispatch(SplashIntent.OnStart)
+    }
+
+    contract.handleEvents { event ->
+        when (event) {
+            is SplashEvent.NavigateTutorial -> navigator.tutorial()
+            is SplashEvent.NavigateWorkList -> navigator.workList()
+        }
+    }
+
+    SplashScreen(state = state, dispatch = dispatch)
 }
 
 
 @Composable
 private fun SplashScreen(
-    // TODO: state 後で追加
-    navigator: SplashNavigator?,
+    state: SplashState,
+    dispatch: (SplashIntent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -40,11 +60,13 @@ private fun SplashScreen(
                 .fillMaxSize(),
             contentAlignment = Alignment.Center,
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.img_splash_search),
-                contentDescription = null,
-                modifier = Modifier.size(100.dp)
-            )
+            state.render<SplashState.Stable> {
+                Image(
+                    painter = painterResource(id = R.drawable.img_splash_search),
+                    contentDescription = null,
+                    modifier = Modifier.size(100.dp)
+                )
+            }
         }
     }
 }
@@ -53,6 +75,9 @@ private fun SplashScreen(
 @Composable
 private fun SplashScreenPreview() {
     SampleTheme {
-        SplashScreen(navigator = null)
+        SplashScreen(
+            state = SplashState.Stable,
+            dispatch = {},
+        )
     }
 }
