@@ -16,22 +16,44 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
+import jp.co.yumemi.core.foundation.Contract
 import jp.co.yumemi.core.primitives.SampleTheme
+import jp.co.yumemi.core.utils.render
 import jp.co.yumemi.core.utils.screenPadding
 import jp.co.yumemi.domain.entities.WorkEntity
 import jp.co.yumemi.domain.entities.WorkEpisodeEntity
+import jp.co.yumemi.workDetails.WorkDetailsEvent
+import jp.co.yumemi.workDetails.WorkDetailsIntent
+import jp.co.yumemi.workDetails.WorkDetailsState
+
+@Composable
+fun WorkDetailsScreenRoot(
+    contract: Contract<WorkDetailsIntent, WorkDetailsState, WorkDetailsEvent>,
+) {
+    val (state, dispatch) = contract
+
+    LaunchedEffect(Unit) {
+        dispatch(WorkDetailsIntent.OnStart)
+    }
+
+    WorkDetailsScreen(
+        state = state,
+        dispatch = dispatch,
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WorkDetailsScreen(
-    workDetail: WorkEntity,
-    workEpisode: List<WorkEpisodeEntity>,
+private fun WorkDetailsScreen(
+    state: WorkDetailsState,
+    dispatch: (WorkDetailsIntent) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -53,36 +75,43 @@ fun WorkDetailsScreen(
                 .background(color = SampleTheme.colors.background)
                 .padding(paddingValues = contentPadding),
         ) {
-            // TODO: API繋ぎ込み
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-            ) {
-                // TODO: 作品イメージ画像挿入
-                Box(
+            state.render<WorkDetailsState.Loading> {
+                // TODO: 実装
+            }
+            state.render<WorkDetailsState.Error> {
+                // TODO: 実装
+            }
+            state.render<WorkDetailsState.Stable> {
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(180.dp)
-                        .background(color = SampleTheme.colors.surface)
-                )
-                WorkTitleBar(
-                    title = workDetail.title,
-                    seasonName = workDetail.seasonName
-                )
-                WorkDetailsHeader(title = stringResource(id = R.string.work_detail_title))
-                WorkInfoSection(
-                    seasonName = workDetail.seasonName,
-                    episodes = workDetail.episodes,
-                    watchers = workDetail.watchers,
-                    reviews = workDetail.reviews,
-                )
-                WorkDetailsHeader(title = stringResource(id = R.string.work_detail_episode))
-                workEpisode.forEach { episode ->
-                    WorkEpisodeItem(
-                        episodeNumber = episode.episodeNumber,
-                        episodeTitle = episode.episodeTitle
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    // TODO: 作品イメージ画像挿入
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(180.dp)
+                            .background(color = SampleTheme.colors.surface)
                     )
+                    WorkTitleBar(
+                        title = work.title,
+                        seasonName = work.seasonName
+                    )
+                    WorkDetailsHeader(title = stringResource(id = R.string.work_detail_title))
+                    WorkInfoSection(
+                        seasonName = work.seasonName,
+                        episodes = work.episodes,
+                        watchers = work.watchers,
+                        reviews = work.reviews,
+                    )
+                    WorkDetailsHeader(title = stringResource(id = R.string.work_detail_episode))
+                    workEpisodeList.forEach { episode ->
+                        WorkEpisodeItem(
+                            episodeNumber = episode.episodeNumber,
+                            episodeTitle = episode.episodeTitle
+                        )
+                    }
                 }
             }
         }
@@ -94,41 +123,44 @@ fun WorkDetailsScreen(
 private fun WorkDetailsScreenPreview() {
     SampleTheme {
         WorkDetailsScreen(
-            workDetail = WorkEntity(
-                id = 1,
-                title = "Title Japanese",
-                seasonName = "2014年秋",
-                imageUrl = null,
-                episodes = 24,
-                watchers = 125,
-                reviews = 125,
+            state = WorkDetailsState.Stable(
+                work = WorkEntity(
+                    id = 1,
+                    title = "Title Japanese",
+                    seasonName = "2014年秋",
+                    imageUrl = null,
+                    episodes = 24,
+                    watchers = 125,
+                    reviews = 125,
+                ),
+                workEpisodeList = listOf(
+                    WorkEpisodeEntity(
+                        episodeNumber = "第1話",
+                        episodeTitle = "Title Episode Japanese"
+                    ),
+                    WorkEpisodeEntity(
+                        episodeNumber = "第2話",
+                        episodeTitle = "Title Episode Japanese"
+                    ),
+                    WorkEpisodeEntity(
+                        episodeNumber = "第3話",
+                        episodeTitle = "Title Episode Japanese"
+                    ),
+                    WorkEpisodeEntity(
+                        episodeNumber = "第4話",
+                        episodeTitle = "Title Episode Japanese"
+                    ),
+                    WorkEpisodeEntity(
+                        episodeNumber = "第5話",
+                        episodeTitle = "Title Episode Japanese"
+                    ),
+                    WorkEpisodeEntity(
+                        episodeNumber = "第6話",
+                        episodeTitle = "Title Episode Japanese"
+                    ),
+                )
             ),
-            workEpisode = listOf(
-                WorkEpisodeEntity(
-                    episodeNumber = "第1話",
-                    episodeTitle = "Title Episode Japanese"
-                ),
-                WorkEpisodeEntity(
-                    episodeNumber = "第2話",
-                    episodeTitle = "Title Episode Japanese"
-                ),
-                WorkEpisodeEntity(
-                    episodeNumber = "第3話",
-                    episodeTitle = "Title Episode Japanese"
-                ),
-                WorkEpisodeEntity(
-                    episodeNumber = "第4話",
-                    episodeTitle = "Title Episode Japanese"
-                ),
-                WorkEpisodeEntity(
-                    episodeNumber = "第5話",
-                    episodeTitle = "Title Episode Japanese"
-                ),
-                WorkEpisodeEntity(
-                    episodeNumber = "第6話",
-                    episodeTitle = "Title Episode Japanese"
-                ),
-            )
+            dispatch = {},
         )
     }
 }
