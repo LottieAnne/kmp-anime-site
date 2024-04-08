@@ -10,7 +10,7 @@ sealed interface AndroidModule : Module {
         Sample(":android:features:sample"),
         Tutorial(":android:features:tutorial"),
         Home(":android:features:home"),
-        WorkDetail(":android:features:workDetail"),
+        WorkDetails(":android:features:workDetails"),
         Splash(":android:features:splash"),
     }
 }
