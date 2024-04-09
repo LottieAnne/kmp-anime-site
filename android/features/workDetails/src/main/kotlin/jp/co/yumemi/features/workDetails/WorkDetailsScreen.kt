@@ -25,6 +25,7 @@ import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
 import jp.co.yumemi.core.foundation.Contract
 import jp.co.yumemi.core.primitives.SampleTheme
+import jp.co.yumemi.core.utils.handleEvents
 import jp.co.yumemi.core.utils.render
 import jp.co.yumemi.core.utils.screenPadding
 import jp.co.yumemi.domain.entities.WorkEntity
@@ -36,11 +37,18 @@ import jp.co.yumemi.workDetails.WorkDetailsState
 @Composable
 fun WorkDetailsScreenRoot(
     contract: Contract<WorkDetailsIntent, WorkDetailsState, WorkDetailsEvent>,
+    navigator: WorkDetailsNavigator,
 ) {
     val (state, dispatch) = contract
 
     LaunchedEffect(Unit) {
         dispatch(WorkDetailsIntent.OnStart)
+    }
+
+    contract.handleEvents { event ->
+        when (event) {
+            is WorkDetailsEvent.NavigateBack -> navigator.back()
+        }
     }
 
     WorkDetailsScreen(
@@ -60,8 +68,7 @@ private fun WorkDetailsScreen(
             CommonTopAppBar(
                 title = stringResource(R.string.work_detail_title),
                 navigationIcon = {
-                    // TODO: onClick実装
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { dispatch(WorkDetailsIntent.ClickBack) }) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
                     }
                 },
