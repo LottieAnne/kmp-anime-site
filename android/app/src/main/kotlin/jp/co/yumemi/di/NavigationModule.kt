@@ -8,10 +8,12 @@ import jp.co.yumemi.features.home.HomeNavigator
 import jp.co.yumemi.features.sample.SampleNavigator
 import jp.co.yumemi.features.splash.SplashNavigator
 import jp.co.yumemi.features.tutorial.TutorialNavigator
+import jp.co.yumemi.features.workDetails.WorkDetailsNavigator
 import jp.co.yumemi.navigation.HomeNavigation
 import jp.co.yumemi.navigation.SampleNavigation
 import jp.co.yumemi.navigation.SplashNavigation
 import jp.co.yumemi.navigation.TutorialNavigation
+import jp.co.yumemi.navigation.WorkDetailsNavigation
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
@@ -27,4 +29,7 @@ class NavigationModule {
 
     @Provides
     fun provideHomeNavigator(): HomeNavigator = HomeNavigation()
+
+    @Provides
+    fun provideWorkDetailsNavigator(): WorkDetailsNavigator = WorkDetailsNavigation()
 }
