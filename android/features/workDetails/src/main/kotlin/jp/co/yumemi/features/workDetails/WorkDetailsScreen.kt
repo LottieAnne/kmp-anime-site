@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
+import jp.co.yumemi.core.components.LoadingIndicator
 import jp.co.yumemi.core.foundation.Contract
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.utils.handleEvents
@@ -83,7 +84,7 @@ private fun WorkDetailsScreen(
                 .padding(paddingValues = contentPadding),
         ) {
             state.render<WorkDetailsState.Loading> {
-                // TODO: 実装
+                LoadingIndicator()
             }
             state.render<WorkDetailsState.Error> {
                 // TODO: 実装
