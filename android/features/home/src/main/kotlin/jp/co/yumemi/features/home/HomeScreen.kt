@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
+import jp.co.yumemi.core.components.LoadingIndicator
 import jp.co.yumemi.core.foundation.Contract
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.utils.handleEvents
@@ -70,7 +71,7 @@ private fun HomeScreen(
                 .padding(paddingValues = contentPadding),
         ) {
             state.render<HomeState.Loading> {
-                // TODO: Loading画面の追加
+                LoadingIndicator()
             }
 
             state.render<HomeState.Error> {
