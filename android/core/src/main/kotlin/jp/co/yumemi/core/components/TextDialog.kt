@@ -21,7 +21,7 @@ import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.primitives.Spacing
 
 @Composable
-fun NewDialog(
+fun TextDialog(
     title: String,
     message: String,
     positiveText: String? = null,
@@ -104,7 +104,7 @@ fun NewDialog(
 @Composable
 private fun TextDialogPreview() {
     SampleTheme {
-        NewDialog(
+        TextDialog(
             title = "Dialog Title",
             message = "Dialog Message",
             positiveText = "Positive",
