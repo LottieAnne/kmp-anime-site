@@ -6,4 +6,6 @@ import tech.fika.macaron.core.contract.Action
 sealed class HomeAction : Action {
     data object GetWorkList : HomeAction()
     data class NavigateDetails(val listItem: WorkEntity) : HomeAction()
+    data class ShowErrorDialog(val errorMessage: String) : HomeAction()
+    data object CloseErrorDialog : HomeAction()
 }
