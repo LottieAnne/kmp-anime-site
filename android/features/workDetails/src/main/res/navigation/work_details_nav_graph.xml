@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/work_details_nav_graph"
+    app:startDestination="@id/work_details"
+    >
+
+
+    <fragment
+        android:id="@+id/work_details"
+        android:name="jp.co.yumemi.features.workDetails.WorkDetailsFragment"
+        android:label="WorkDetails">
+        <argument
+            android:name="work"
+            app:argType="jp.co.yumemi.domain.entities.WorkEntity"
+            />
+    </fragment>
+</navigation>

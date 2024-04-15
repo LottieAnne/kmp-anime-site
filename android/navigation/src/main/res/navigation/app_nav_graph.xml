@@ -8,23 +8,30 @@
     <include app:graph="@navigation/splash_nav_graph" />
     <include app:graph="@navigation/tutorial_nav_graph" />
     <include app:graph="@navigation/home_nav_graph" />
+    <include app:graph="@navigation/work_details_nav_graph" />
 
     <action
         android:id="@+id/action_from_splash_to_tutorial"
         app:destination="@+id/tutorial_nav_graph"
         app:popUpTo="@+id/splash_fragment"
-        app:popUpToInclusive="true"
-        />
+        app:popUpToInclusive="true" />
 
     <action
         android:id="@+id/action_from_splash_to_work_list"
         app:destination="@+id/home_nav_graph"
         app:popUpTo="@+id/splash_fragment"
-        app:popUpToInclusive="true">
-    </action>
+        app:popUpToInclusive="true" />
 
     <action
         android:id="@+id/action_tutorial_to_work_list"
         app:destination="@+id/home_nav_graph" />
+
+    <action
+        android:id="@+id/action_from_work_list_to_work_details"
+        app:destination="@+id/work_details_nav_graph">
+        <argument
+            android:name="work"
+            app:argType="jp.co.yumemi.domain.entities.WorkEntity" />
+    </action>
 
 </navigation>

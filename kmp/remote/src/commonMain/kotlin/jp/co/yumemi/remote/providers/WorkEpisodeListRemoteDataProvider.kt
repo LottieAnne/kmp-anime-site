@@ -8,12 +8,12 @@ import jp.co.yumemi.remote.core.exception.RemoteExceptionHandler
 import jp.co.yumemi.remote.mappers.WorkEpisodeListRemoteMapper
 
 class WorkEpisodeListRemoteDataProvider(
-    private val workEpisodeList: WorkEpisodeListApi,
+    private val workEpisodeListApi: WorkEpisodeListApi,
     private val exceptionHandler: RemoteExceptionHandler,
 ) : WorkEpisodeListRemoteDataSource {
     override suspend fun getWorkEpisodeList(id: Int): List<WorkEpisodeListModel> =
         runHandling(exceptionHandler) {
-            workEpisodeList.getWorkEpisodeList(id).body()
+            workEpisodeListApi.getWorkEpisodeList(id).body()
                 .let(WorkEpisodeListRemoteMapper::toDataModel)
         }
 }

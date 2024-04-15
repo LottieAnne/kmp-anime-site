@@ -31,7 +31,7 @@ dependencies {
         AndroidModule.Feature.Sample,
         AndroidModule.Feature.Tutorial,
         AndroidModule.Feature.Home,
-        AndroidModule.Feature.WorkDetail,
+        AndroidModule.Feature.WorkDetails,
         AndroidModule.Feature.Splash,
     )
     implementations(

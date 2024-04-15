@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "jp.co.yumemi.features.workDetail"
+    namespace = "jp.co.yumemi.features.workDetails"
 }
 
 dependencies {

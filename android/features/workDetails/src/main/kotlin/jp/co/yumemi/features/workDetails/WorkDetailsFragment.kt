@@ -1,4 +1,4 @@
-package jp.co.yumemi.features.home
+package jp.co.yumemi.features.workDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,17 +13,17 @@ import jp.co.yumemi.core.utils.composeView
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class WorkDetailsFragment : Fragment() {
     @Inject
-    lateinit var navigator: HomeNavigator
+    lateinit var navigator: WorkDetailsNavigator
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: WorkDetailsViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View = composeView {
-        HomeScreenRoot(
+        WorkDetailsScreenRoot(
             contract = contract(store = viewModel.store),
             navigator = navigator.setNavController()
         )
