@@ -7,7 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -59,7 +63,14 @@ private fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            CommonTopAppBar(title = stringResource(R.string.home_title))
+            CommonTopAppBar(
+                title = stringResource(R.string.home_title),
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(imageVector = Icons.Default.Search, contentDescription = null)
+                    }
+                },
+            )
         },
         modifier = Modifier.screenPadding(),
     ) { contentPadding ->
