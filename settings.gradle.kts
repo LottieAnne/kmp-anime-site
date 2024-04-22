@@ -53,6 +53,7 @@ include(":kmp:presentation:tutorial-shared")
 include(":kmp:presentation:home-shared")
 include(":kmp:presentation:splash-shared")
 include(":kmp:presentation:work-details-shared")
+include(":kmp:presentation:work-search-shared")
 
 fun getProperty(key: String, default: String? = null): String = System.getProperty(key)
     ?: System.getenv(key)

@@ -13,6 +13,7 @@ sealed interface KmpModule : Module {
         Tutorial(":kmp:presentation:tutorial-shared"),
         Home(":kmp:presentation:home-shared"),
         Splash(":kmp:presentation:splash-shared"),
-        WorkDetails(":kmp:presentation:work-details-shared")
+        WorkDetails(":kmp:presentation:work-details-shared"),
+        WorkSearch(":kmp:presentation:work-search-shared")
     }
 }
