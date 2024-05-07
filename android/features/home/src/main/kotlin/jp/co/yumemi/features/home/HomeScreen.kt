@@ -7,7 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import jp.co.yumemi.core.R
 import jp.co.yumemi.core.components.CommonTopAppBar
+import jp.co.yumemi.core.components.WorkListItem
 import jp.co.yumemi.core.components.LoadingIndicator
 import jp.co.yumemi.core.foundation.Contract
 import jp.co.yumemi.core.primitives.SampleTheme
@@ -59,7 +64,14 @@ private fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            CommonTopAppBar(title = stringResource(R.string.home_title))
+            CommonTopAppBar(
+                title = stringResource(R.string.home_title),
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(imageVector = Icons.Default.Search, contentDescription = null)
+                    }
+                },
+            )
         },
         modifier = Modifier.screenPadding(),
     ) { contentPadding ->
@@ -85,7 +97,7 @@ private fun HomeScreen(
                         .verticalScroll(rememberScrollState())
                 ) {
                     workList.forEach { item ->
-                        HomeListItem(
+                        WorkListItem(
                             title = item.title,
                             seasonName = item.seasonName,
                             imageUrl = item.imageUrl,

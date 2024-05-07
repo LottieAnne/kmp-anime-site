@@ -1,4 +1,4 @@
-package jp.co.yumemi.features.home
+package jp.co.yumemi.core.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -19,12 +19,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
+import jp.co.yumemi.core.R
 import jp.co.yumemi.core.primitives.SampleTheme
 import jp.co.yumemi.core.primitives.Spacing
-import jp.co.yumemi.core.R
 
 @Composable
-internal fun HomeListItem(
+fun WorkListItem(
     title: String,
     seasonName: String,
     imageUrl: String?,
@@ -71,10 +71,10 @@ internal fun HomeListItem(
 
 @Preview
 @Composable
-private fun HomeListItemPreview() {
+private fun WorkListItemPreview() {
     SampleTheme {
         Surface {
-            HomeListItem(
+            WorkListItem(
                 imageUrl = "http://shirobako-anime.com/images/ogp.jpg",
                 title = "Title Japanese",
                 seasonName = "Season Name",
